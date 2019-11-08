@@ -1,9 +1,7 @@
-# simple-nn-classification
+# Introduction to Machine Learning (and Tuning)
 Simple Feed-Forward Neural Network that classifies characters on the mnist dataset.
 
-Displays the following:
-1. Pytorch Deep Model
-2. Saving and Loading Pytorch Models
-3. Tensorboard Logging
-4. Weights & Bias Logging
-5. Commandline Training
+Learn to:
+ - Create Neural Networks in _Pytorch_
+ - Visualize Training with _Tensorboard_ and _Weights and Bias_
+ - Learn to setup hyperparameter control for the commandline for fast tuning
