@@ -122,7 +122,8 @@ def train_classifier(args):
                 train_logger.add_scalar('learning rate', optimizer.param_groups[0]['lr'], global_step)
 
     # Training Complete
-    print("Saved: ", not args.no_save)
+    print("Training Complete")
+    print("Model Saved: ", not args.no_save, end='\n\n')
     if not args.no_save: model.save_model()
     return model
 
@@ -190,14 +191,13 @@ def eval_mnist(model):
     total_accuracy = total_correct/len(correct_preds)
 
     # Class by class accuracy
-    print()
     for i in range(10):
         class_i = (y == i).float()
         class_correct = (correct_preds * class_i).sum()
         class_total = class_i.sum()
         class_accuracy = class_correct/class_total
         print("Class: {} | {: 5.1f}%".format(i, class_accuracy*100))
-    print("Total Accuracy: {: 5.1f}%".format(total_accuracy*100))
+    print("Total Accuracy: {: 5.1f}%".format(total_accuracy*100), end='\n\n')
 
 def get_mnist_accuracy(model, dataset):
     model.eval()
@@ -218,8 +218,8 @@ def print_args(args, parser, defaults=False):
     print("|Training Dataset Dir:   | '--train_ds'               |  ", (args.train_ds          if not defaults else parser.get_default('train_ds')))
     print("|Validation Dataset Dir: | '--valid_ds'               |  ", (args.valid_ds          if not defaults else parser.get_default('valid_ds')))
     print("|Log Directory:          | '--log_dir'                |  ", (args.log_dir           if not defaults else parser.get_default('log_dir')))
-    print("|TensorBoard:            | '--tensorboard'            |  ", (args.tensorboard       if not defaults else parser.get_default('tensorboard')))
-    print("|Weights & Bias:         | '--wandb'                  |  ", (args.wandb             if not defaults else parser.get_default('wandb')))
+    print("|TensorBoard:            | '-T', '--tensorboard'      |  ", (args.tensorboard       if not defaults else parser.get_default('tensorboard')))
+    print("|Weights & Bias:         | '-W', '--wandb'            |  ", (args.wandb             if not defaults else parser.get_default('wandb')))
     print("|Description:            | '--description'            |  ", (args.description       if not defaults else parser.get_default('description')))
     print("|Epochs:                 | '-e', '--epochs'           |  ", (args.epochs            if not defaults else parser.get_default('epochs')))
     print("|Batch Size:             | '-b', '--batch_size'       |  ", (args.batch_size        if not defaults else parser.get_default('batch_size')))
