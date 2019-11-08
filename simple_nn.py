@@ -53,7 +53,7 @@ def train_classifier(args):
     else: model = classifier(args.layers).to(device)
     # Data Loader
     if args.valid_ds == '':
-        train_data, valid_data = load_data(args.valid_ds, batch_size=args.batch_size, valid=True)
+        train_data, valid_data = load_data(args.train_ds, batch_size=args.batch_size, valid=True)
     else:
         train_data = load_data(args.train_ds, batch_size=args.batch_size)
         valid_data = load_data(args.valid_ds, batch_size=args.batch_size)
@@ -183,13 +183,14 @@ get_model_id.ret = None
 # -- Evaluation --
 def eval_mnist(model):
     model.eval()
-    test_ds = load_data('../datasets', batch_size=None, train=False)
+    test_ds = load_data('../datasets/', batch_size=None, train=False)
     x, y = next(iter(test_ds))
     correct_preds = (model.classify(x) == y).float()
     total_correct = correct_preds.sum()
     total_accuracy = total_correct/len(correct_preds)
 
     # Class by class accuracy
+    print()
     for i in range(10):
         class_i = (y == i).float()
         class_correct = (correct_preds * class_i).sum()
@@ -238,7 +239,7 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('--train_ds', type=str, default='../datasets')
+    parser.add_argument('--train_ds', type=str, default='../datasets/')
     parser.add_argument('--valid_ds', type=str, default='')
     parser.add_argument('--log_dir', type=str, default='./logs')
     parser.add_argument('-T','--tensorboard', action='store_true', default=False)
