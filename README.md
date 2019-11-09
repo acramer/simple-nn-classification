@@ -1,5 +1,5 @@
 # Introduction to Machine Learning (and Tuning)
-Simple Feed-Forward Neural Network that classifies characters on the mnist dataset.
+Displays a Feed-Forward Neural Network that classifies handwritten numbers from the mnist dataset.
 
 Learn to:
  - Create Neural Networks in _Pytorch_
